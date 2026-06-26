@@ -21,7 +21,12 @@ pool = None
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global pool
-    pool = await asyncpg.create_pool(DATABASE_URL, min_size=5, max_size=20)
+    pool = await asyncpg.create_pool(
+        DATABASE_URL, 
+        min_size=1, 
+        max_size=2,
+        statement_cache_size=0
+    )
     yield
     await pool.close()
 
@@ -35,7 +40,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

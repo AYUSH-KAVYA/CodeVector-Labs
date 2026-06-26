@@ -74,7 +74,7 @@ def main() -> None:
     print(f"   ✅ Generated in {gen_time:.2f}s")
 
     print(f"\n🔌 Connecting to PostgreSQL...")
-    with psycopg.connect(DATABASE_URL) as conn:
+    with psycopg.connect(os.getenv("DATABASE_URL")) as conn:
         with conn.cursor() as cur:
             with open("schema.sql") as f:
                 cur.execute(f.read())
