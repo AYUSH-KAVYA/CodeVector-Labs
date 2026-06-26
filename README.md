@@ -163,3 +163,56 @@ Expected output:
    Generation: 2.15s | COPY: 1.83s | Total: 3.98s
 ```
 
+### 3. Start the API
+
+```bash
+uvicorn main:app --reload --port 8000
+```
+
+- API: http://localhost:8000
+- Swagger Docs: http://localhost:8000/docs
+
+### 4. Start the Frontend
+
+```bash
+cd frontend
+npm install   # Only needed first time
+npm run dev
+```
+
+- UI: http://localhost:5173
+
+---
+
+## 📡 API Reference
+
+### `GET /products`
+
+Fetch products with cursor-based pagination.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `category` | string | `"Electronics"` | Filter by category |
+| `limit` | int (1-100) | `50` | Items per page |
+| `cursor` | string | `null` | Base64 cursor from previous response |
+
+**Response:**
+```json
+{
+  "data": [
+    {
+      "id": 199847,
+      "name": "Premium Widget Ele-42",
+      "category": "Electronics",
+      "price": 249.99,
+      "created_at": "2025-06-25T14:30:00+00:00",
+      "updated_at": "2025-06-26T08:15:00+00:00"
+    }
+  ],
+  "next_cursor": "eyJjIjoiMjAyNS0wNi0yNVQxNDozMDowMCswMDowMCIsImkiOjE5OTg0N30="
+}
+```
+
+- `next_cursor` is `null` when there are no more pages.
+- Pass `next_cursor` as the `cursor` param to get the next page.
+
