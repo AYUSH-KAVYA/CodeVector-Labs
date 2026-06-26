@@ -216,3 +216,14 @@ Fetch products with cursor-based pagination.
 - `next_cursor` is `null` when there are no more pages.
 - Pass `next_cursor` as the `cursor` param to get the next page.
 
+### `GET /categories`
+
+Returns all categories with product counts.
+
+```json
+[
+  { "name": "Electronics", "count": 20143 },
+  { "name": "Clothing", "count": 19876 }
+]
+```
+
