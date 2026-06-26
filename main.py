@@ -207,3 +207,5 @@ async def create_product(product: ProductCreate):
             product.price,
         )
         return row_to_dict(row)
+
+# FastAPI server configuration and startup endpoints definition
