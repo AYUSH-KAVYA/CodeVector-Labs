@@ -227,3 +227,17 @@ Returns all categories with product counts.
 ]
 ```
 
+### `POST /products`
+
+Insert a new product (used by the Simulate panel).
+
+```json
+{
+  "name": "Quantum Processor X1",
+  "category": "Electronics",
+  "price": 299.99
+}
+```
+
+---
+
