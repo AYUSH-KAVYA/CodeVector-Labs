@@ -127,3 +127,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# psycopg COPY protocol bulk ingestion logic
