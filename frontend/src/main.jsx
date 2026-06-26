@@ -9,4 +9,3 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 )
 
-// Cleaned up imports and entry structure

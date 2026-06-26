@@ -79,3 +79,4 @@ function ProductGrid({ products, loading, hasMore, onLoadMore, category, totalLo
 }
 
 export default ProductGrid;
+

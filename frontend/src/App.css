@@ -1,7 +1,3 @@
-/* ============================================
-   App Layout Styles
-   ============================================ */
-
 .app {
   min-height: 100vh;
   display: flex;
@@ -19,7 +15,7 @@
   flex: 1;
   overflow-y: auto;
   padding: 24px 32px;
-  padding-bottom: 100px; /* Space for simulate panel */
+  padding-bottom: 100px; 
 }
 
 .content-area::-webkit-scrollbar {
@@ -39,7 +35,6 @@
   background: rgba(124, 58, 237, 0.45);
 }
 
-/* ---- Toast Notification ---- */
 .toast {
   position: fixed;
   top: 80px;
@@ -81,7 +76,6 @@
   to { opacity: 0; }
 }
 
-/* ---- Responsive ---- */
 @media (max-width: 768px) {
   .app-main {
     flex-direction: column;
@@ -92,3 +86,4 @@
     padding-bottom: 100px;
   }
 }
+

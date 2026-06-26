@@ -44,14 +44,12 @@ function App() {
     }
   }, [showToast]);
 
-  // Load categories on mount
   useEffect(() => {
     fetchCategories()
       .then(setCategories)
       .catch(err => console.error('Failed to fetch categories:', err));
   }, []);
 
-  // Load products when category changes
   useEffect(() => {
     setProducts([]);
     setCursor(null);
@@ -92,7 +90,6 @@ function App() {
       'Tesla Bow', 'Photon Axe',
     ];
 
-    // Determine target category for insertion (avoid using 'All' directly)
     const nonAllCategories = categories.filter(c => c.name !== 'All');
     const targetCategory = selectedCategory === 'All'
       ? (nonAllCategories[Math.floor(Math.random() * nonAllCategories.length)]?.name || 'Electronics')
@@ -116,7 +113,6 @@ function App() {
       }
       showToast(`50 products inserted into ${targetCategory}! Refresh or keep scrolling.`, '🚀');
 
-      // Refresh categories count
       fetchCategories().then(setCategories).catch(() => {});
     } catch (err) {
       console.error('Simulate insert error:', err);
@@ -177,8 +173,3 @@ function App() {
 
 export default App;
 
-// Toast is auto-dismissed after 3000ms
-
-// Batch size configured to simulate fast multi-inserts
-
-// Selected category updates reset cursor and list state

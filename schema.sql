@@ -29,3 +29,15 @@ CREATE INDEX IF NOT EXISTS idx_products_created_id
 -- Composite index structure ensures lightning-fast queries
 
 -- Optimized indices for category sorting and page queries
+
+-- RPC helper for retrieving distinct categories and their counts
+CREATE OR REPLACE FUNCTION get_category_counts()
+RETURNS TABLE(category VARCHAR, count BIGINT) AS $$
+BEGIN
+  RETURN QUERY
+  SELECT p.category, COUNT(*)::BIGINT
+  FROM products p
+  GROUP BY p.category
+  ORDER BY p.category;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;

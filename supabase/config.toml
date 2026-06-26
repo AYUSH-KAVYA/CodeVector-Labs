@@ -1,0 +1,2 @@
+[functions.products]
+verify_jwt = false

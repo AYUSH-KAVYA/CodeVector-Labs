@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@supabase/server": "^1.2.0"
+  },
+  "name": "database-task",
+  "version": "1.0.0",
+  "description": "> **Browse 200,000 products with zero duplicates and zero skipped rows — even when data changes mid-scroll.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AYUSH-KAVYA/CodeVector-Labs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/AYUSH-KAVYA/CodeVector-Labs/issues"
+  },
+  "homepage": "https://github.com/AYUSH-KAVYA/CodeVector-Labs#readme"
+}

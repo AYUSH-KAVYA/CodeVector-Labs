@@ -1,7 +1,3 @@
-/* ============================================
-   Header Styles
-   ============================================ */
-
 .header {
   height: 64px;
   display: flex;
@@ -89,7 +85,6 @@
   color: #a78bfa;
 }
 
-/* ---- Header Buttons ---- */
 .header-btn {
   display: inline-flex;
   align-items: center;
@@ -157,7 +152,6 @@
   display: inline-block;
 }
 
-/* ---- Responsive ---- */
 @media (max-width: 768px) {
   .header {
     padding: 0 16px;
@@ -173,4 +167,3 @@
   }
 }
 
-/* Tweak layout spacing on mobile screens */

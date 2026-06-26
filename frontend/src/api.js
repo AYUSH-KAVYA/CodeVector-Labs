@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export async function fetchProducts({ category, limit = 50, cursor = null }) {
   const params = new URLSearchParams({ category, limit: String(limit) });
@@ -24,4 +24,3 @@ export async function createProduct(product) {
   return res.json();
 }
 
-// Handles request failures and maps responses safely

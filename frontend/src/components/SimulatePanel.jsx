@@ -37,3 +37,4 @@ function SimulatePanel({ onSimulate, simulating, progress }) {
 }
 
 export default SimulatePanel;
+

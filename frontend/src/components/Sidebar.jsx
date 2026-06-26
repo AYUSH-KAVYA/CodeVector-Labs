@@ -42,3 +42,4 @@ function Sidebar({ categories, selectedCategory, onCategoryChange }) {
 }
 
 export default Sidebar;
+

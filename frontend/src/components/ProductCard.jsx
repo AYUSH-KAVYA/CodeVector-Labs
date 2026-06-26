@@ -67,3 +67,4 @@ function ProductCard({ product, index }) {
 }
 
 export default ProductCard;
+
