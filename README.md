@@ -118,3 +118,48 @@ Database task/
 - PostgreSQL 14+ (running locally)
 - Node.js 18+
 
+### 1. Create the Database
+
+```bash
+createdb products_db
+```
+
+### 2. Backend Setup
+
+```bash
+cd "Database task"
+
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate    # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# (Optional) Edit .env if your PostgreSQL credentials differ
+# DATABASE_URL=postgresql://postgres:postgres@localhost:5432/products_db
+
+# Run the schema + seed 200k products
+python seed.py
+```
+
+Expected output:
+```
+🗄️  Product Seeder — psycopg COPY
+=============================================
+
+⏳ Generating 200,000 products in memory...
+   ✅ Generated in 2.15s
+
+🔌 Connecting to PostgreSQL...
+   ✅ Schema applied
+   🗑️  Table truncated
+
+⚡ Streaming data via COPY...
+   ✅ COPY completed in 1.83s
+
+=============================================
+✅ Done! 200,000 products across 10 categories
+   Generation: 2.15s | COPY: 1.83s | Total: 3.98s
+```
+
