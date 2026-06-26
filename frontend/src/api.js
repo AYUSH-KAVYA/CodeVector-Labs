@@ -23,3 +23,5 @@ export async function createProduct(product) {
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   return res.json();
 }
+
+// Handles request failures and maps responses safely
