@@ -27,3 +27,5 @@ CREATE INDEX IF NOT EXISTS idx_products_created_id
     ON products (created_at DESC, id DESC);
 
 -- Composite index structure ensures lightning-fast queries
+
+-- Optimized indices for category sorting and page queries
