@@ -33,3 +33,88 @@ Instead of saying *"skip 50 rows"*, we say *"give me rows after this specific po
 -- First page (no cursor)
 SELECT * FROM products
 WHERE category = $1
+ORDER BY created_at DESC, id DESC
+LIMIT 51;                     -- fetch limit+1 to detect "has more"
+
+-- Page 2+ (with cursor from last item)
+SELECT * FROM products
+WHERE category = $1
+  AND (created_at, id) < ($2, $3)   -- ← tuple comparison = keyset
+ORDER BY created_at DESC, id DESC
+LIMIT 51;
+```
+
+The cursor is a **Base64-encoded JSON** of `{ created_at, id }` from the last item on the current page. New inserts above the cursor don't affect results below it.
+
+### Why `(created_at, id)` as the cursor?
+
+- `created_at` gives us **newest-first** ordering
+- `id` is the **tie-breaker** (two products can share a `created_at`)
+- Together, `(created_at DESC, id DESC)` is a **unique sort key** — guaranteed stable
+
+### The Index That Makes It Fast
+
+```sql
+CREATE INDEX idx_products_category_created_id
+    ON products (category, created_at DESC, id DESC);
+```
+
+This composite index means PostgreSQL can answer `WHERE category = 'X' AND (created_at, id) < (ts, id) ORDER BY created_at DESC, id DESC` with a single **index range scan** — no table scan, even with millions of rows.
+
+---
+
+## 📂 Project Structure
+
+```
+Database task/
+├── schema.sql          # PostgreSQL table + indexes
+├── seed.py             # Generates 200k products via psycopg COPY
+├── main.py             # FastAPI API with cursor pagination
+├── requirements.txt    # Python dependencies
+├── .env                # Database connection string
+├── README.md           # You are here
+└── frontend/           # React + Vite UI
+    ├── index.html
+    ├── package.json
+    ├── vite.config.js
+    └── src/
+        ├── main.jsx
+        ├── index.css          # Design system (dark theme)
+        ├── App.jsx            # Main shell + state
+        ├── App.css
+        ├── api.js             # API client
+        └── components/
+            ├── Header.jsx     # Top bar with stats
+            ├── Header.css
+            ├── Sidebar.jsx    # Category filter
+            ├── Sidebar.css
+            ├── ProductCard.jsx    # Glass product card
+            ├── ProductCard.css
+            ├── ProductGrid.jsx    # Grid + Load More
+            ├── ProductGrid.css
+            ├── SimulatePanel.jsx  # Live insert tester
+            └── SimulatePanel.css
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Why |
+|-------|-----------|-----|
+| **API** | FastAPI (Python 3.10+) | Async, fast, auto-docs at `/docs` |
+| **Database** | PostgreSQL | Composite indexes, tuple comparison, COPY protocol |
+| **Async Driver** | asyncpg | Fastest Python PostgreSQL driver (C extension) |
+| **Seed Driver** | psycopg 3 | COPY protocol for bulk streaming |
+| **Frontend** | React + Vite | Fast HMR, modern tooling |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Python 3.10+
+- PostgreSQL 14+ (running locally)
+- Node.js 18+
+
