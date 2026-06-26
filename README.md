@@ -241,3 +241,18 @@ Insert a new product (used by the Simulate panel).
 
 ---
 
+## 🧪 Testing Cursor Stability
+
+The UI includes a **"Simulate 50 Inserts"** button at the bottom. Here's how to test:
+
+1. Open the UI and load a couple pages of "Electronics"
+2. Click **🚀 Simulate 50 Inserts**
+3. Watch 50 new products get inserted into the *same category*
+4. Click **Load More** — you'll get the next logical page with **zero duplicates** and **zero skipped items**
+
+This works because the cursor remembers exactly where you left off. New inserts have `created_at = NOW()`, which is *above* your cursor position, so they're invisible to your current pagination session.
+
+---
+
+## 🔑 Key Design Decisions
+
