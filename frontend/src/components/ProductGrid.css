@@ -1,0 +1,240 @@
+/* ============================================
+   Product Grid Styles
+   ============================================ */
+
+.product-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-grid-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.product-grid-count {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.product-grid-category {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* ---- Grid Layout ---- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* ---- Skeleton Cards ---- */
+.skeleton-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skeleton-line {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--bg-surface) 0%,
+    var(--bg-surface-hover) 50%,
+    var(--bg-surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-badge {
+  width: 80px;
+  height: 22px;
+}
+
+.skeleton-price {
+  width: 100px;
+  height: 28px;
+}
+
+.skeleton-name {
+  width: 100%;
+  height: 18px;
+}
+
+.skeleton-name-short {
+  width: 65%;
+  height: 18px;
+}
+
+.skeleton-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.skeleton-id {
+  width: 60px;
+  height: 16px;
+}
+
+.skeleton-time {
+  width: 50px;
+  height: 16px;
+}
+
+/* ---- Empty State ---- */
+.product-grid-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.product-grid-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.product-grid-empty h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.product-grid-empty p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ---- Loading More ---- */
+.product-grid-loading-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-subtle);
+  border-top-color: #7c3aed;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ---- Load More Button ---- */
+.product-grid-actions {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+.load-more-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 40px;
+  background: var(--gradient-accent);
+  border: none;
+  border-radius: var(--radius-full);
+  color: #fff;
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.load-more-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.load-more-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 28px rgba(124, 58, 237, 0.45);
+}
+
+.load-more-btn:hover::before {
+  opacity: 1;
+}
+
+.load-more-btn:active {
+  transform: scale(0.98);
+}
+
+.load-more-icon {
+  font-size: 1.2rem;
+  transition: transform var(--transition-normal);
+}
+
+.load-more-btn:hover .load-more-icon {
+  transform: translateY(2px);
+}
+
+/* ---- End of List ---- */
+.product-grid-end {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+  animation: fadeIn 0.5s ease;
+}
+
+.product-grid-end-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.product-grid-end-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
