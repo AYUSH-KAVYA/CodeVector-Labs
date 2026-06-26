@@ -209,3 +209,5 @@ async def create_product(product: ProductCreate):
         return row_to_dict(row)
 
 # FastAPI server configuration and startup endpoints definition
+
+# CORS setup covers typical local frontend port ranges
