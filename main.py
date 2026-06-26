@@ -211,3 +211,5 @@ async def create_product(product: ProductCreate):
 # FastAPI server configuration and startup endpoints definition
 
 # CORS setup covers typical local frontend port ranges
+
+# Database connection pooling lifecycle handlers
