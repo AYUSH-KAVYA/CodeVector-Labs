@@ -256,3 +256,30 @@ This works because the cursor remembers exactly where you left off. New inserts 
 
 ## 🔑 Key Design Decisions
 
+### Why psycopg COPY instead of INSERT loops?
+
+```python
+# ❌ Slow: 200k individual INSERTs = ~60 seconds
+for product in products:
+    cur.execute("INSERT INTO products VALUES (%s, %s, ...)", product)
+
+# ✅ Fast: COPY streams all rows in one pass = ~2 seconds
+with cur.copy("COPY products (...) FROM STDIN") as copy:
+    for line in tsv_buffer:
+        copy.write(line)
+```
+
+COPY uses PostgreSQL's bulk loading protocol — it skips query parsing, planning, and per-row overhead entirely.
+
+### Why asyncpg instead of psycopg for the API?
+
+- **asyncpg** is written in C/Cython and speaks PostgreSQL's binary protocol natively
+- It's the fastest Python PostgreSQL driver for async workloads
+- Combined with FastAPI's async handlers, the API can handle many concurrent requests without blocking
+
+### Why `LIMIT N+1` instead of a COUNT query?
+
+To determine if there are more pages, we fetch `limit + 1` rows and check if we got the extra one. This avoids an expensive `COUNT(*)` query on every request.
+
+---
+
