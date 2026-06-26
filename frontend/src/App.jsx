@@ -180,3 +180,5 @@ export default App;
 // Toast is auto-dismissed after 3000ms
 
 // Batch size configured to simulate fast multi-inserts
+
+// Selected category updates reset cursor and list state
