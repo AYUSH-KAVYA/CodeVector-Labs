@@ -301,3 +301,6 @@ The keyset approach gives **O(1) pagination regardless of how deep you go** — 
 ## 📜 License
 
 MIT — Use this pattern in your own projects.
+
+
+*Note: The default category is 'All', querying all products across categories by default.*
